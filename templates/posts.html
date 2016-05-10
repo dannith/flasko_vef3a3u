@@ -1,0 +1,53 @@
+{% extends "template.html" %}
+{% block title %}{{ postinfo.title }}{% endblock %}
+{% block body %}
+<div class="divider"></div>
+  <div class="section">
+      <div class="row">
+      <div class="col s2">
+          <div class="chip">{{ postinfo.author }}</div>
+      </div>
+          <div class="col s10">
+              <h5>{{ postinfo.title }}</h5>
+              <p>{{ postinfo.text }}</p>
+          </div>
+      </div>
+  </div>
+ <div class="divider"></div>
+
+{% if comments %}
+<p>Comments: <span class="grey-text text-lighten-2">(Click to expand)</span></p>
+  <ul class="collapsible" data-collapsible="expandable">
+      {% for comment in comments %}
+      <li>
+          <div class="collapsible-header">{{ comment.username }}</div>
+          <div class="collapsible-body"><p>{{ comment.text }}</p></div>
+      </li>
+      {% endfor %}
+  </ul>
+{% endif %}
+{% if postinfo.commentable == 0 and session.id %}
+<form action="" method=post>
+<div class="col s12">
+    <label>Make a comment:</label>
+    <textarea name="comment" class="materialize-textarea indigo lighten-5"></textarea>
+</div>
+<div class="center-align">
+    <input type="submit" class="waves-effect waves-light btn" value="Submit Comment">
+</div>
+</form>
+{% elif postinfo.commentable == 0 and not session.id %}
+<div class="valign-wrapper row">
+    <div class="valign col s12 nocomments">
+    <p class="center-align blue-grey-text">Please <a href="{{ url_for('login') }}">login</a> to comment.</p>
+    </div>
+</div>
+{% else %}
+<div class="valign-wrapper row">
+    <div class="valign col s12 nocomments">
+    <p class="center-align blue-grey-text">Comments are <span class="grey-text">disabled</span> for this post.</p>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+{% block title %}Create Post{% endblock %}
+{% block body %}
+<form action="" method=post>
+    <div class="row">
+        <h3 class="center-align blue-grey-text">Manage users:</h3>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <label>Select User</label>
+            <select name="userSelect" class="browser-default indigo lighten-5">
+                {% for user in users %}
+                {% if user.id != session.id %}
+                <option value="{{ user.id }}">{{ user.username }} - {{ user.status }} - {{ user.rank }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s3 offset-s3">
+            <label>Set status:</label>
+            <select name="statusSelect" class="browser-default indigo lighten-5">
+            {% for status in workstatus %}
+                <option value="{{ status.status_id }}">{{ status.description }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="col s3">
+            <label>Set rank:</label>
+            <select name="rankSelect" class="browser-default indigo lighten-5">
+            {% for rank in ranks %}
+                <option value="{{ rank.rank_id }}">{{ rank.description }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-align">
+            <input type="submit" class="waves-effect waves-light btn" value="Update">
+        </div>
+    </div>
+</form>
+{% endblock %}

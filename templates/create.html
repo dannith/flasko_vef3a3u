@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+{% block title %}Create Post{% endblock %}
+{% block body %}
+<form action="" method=post>
+    <div class="row">
+        <h3 class="center-align blue-grey-text">Start a discussion:</h3>
+    </div>
+    <div class="row">
+        <div class="col s8">
+            <label>Choose a title:{% if titleError %}<span class="red-text">  *  </span>{% endif %}</label>
+            <input type="text" name="ptitle" class="indigo lighten-5">
+        </div>
+        <div class="col s3 offset-s1">
+            <label>Comments:</label>
+            <select name="pcommentable" class="browser-default indigo lighten-5">
+                <option value="0">On</option>
+                <option value="1">Off</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <label>Text:{% if textError %}<span class="red-text">  *  </span>{% endif %}</label>
+            <textarea name="ptext" class="materialize-textarea indigo lighten-5"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-align">
+            <input type="submit" class="waves-effect waves-light btn" value="Confirm">
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{% block title %}Appointments{% endblock %}
+{% block body %}
+<form action="" method=post>
+    <div class="row">
+        <h3 class="center-align blue-grey-text">Appointment booking:</h3>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label>Choose a hairdresser:{% if hairerror %}<span class="red-text">  *  </span>{% endif %}</label>
+            <select name="hairdresser" class="browser-default">
+                <option disabled selected value=" ">Pick one:</option>
+                {% for hairdresser in hairdressers %}
+                <option value="{{ hairdresser.id }}">{{ hairdresser.username }} - {{ hairdresser.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col s6">
+            <label>Choose treatment:{% if treaterror %}<span class="red-text">  *  </span>{% endif %}</label>
+            <select name="treatment" class="browser-default">
+                <option disabled selected value="error">Pick one:</option>
+                {% for treatment in treatments %}
+                <option value="{{ treatment.id }}">{{ treatment.description }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <label>Comment (Optional):</label>
+            <textarea name="comment" class="materialize-textarea indigo lighten-5"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-align">
+            <input type="submit" class="waves-effect waves-light btn" value="Order">
+        </div>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "template.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="row">
+    <h4 class="center-align blue-grey-text">Welcome to KlillKlipp!</h4>
+    <h5 class="center-align blue-grey-text text-lighten-2">Worlds best self-proclaimed hair salon!</h5>
+</div>
+<div class="row">
+    <div class="col s8">
+        <p>
+            <b class="blue-grey-text text-darken-2">KlillKlipp</b> is a hair salon that has been in place for over 10 years, we specialize on your needs and adjust to quickly what are sought. KlillKlipp provides all sorts of services such as home montage, montage event and more that can make a specific request in the comments. We also discussed a system where anyone can write their opinion on the matter, what can be improved and stuff (you can see this below).
+        </p>
+    </div>
+    <div class="col s4">
+        <p>To begin click register on the top right corner</p>
+    </div>
+</div>
+{% if posts %}
+<div class="row">
+    <h4 class="center-align blue-grey-text">Discussion.</h4>{% if session.id %}<a class="right blue-grey-text text-lighten-4" href="{{ url_for('createPost') }}">Búa til þráð</a>{% endif %}
+</div>
+    {% for post in posts %}
+ <div class="divider"></div>
+  <div class="section">
+      <div class="row">
+      <div class="col s2">
+          <div class="chip">{{ post.author }}</div>
+      </div>
+          <div class="col s10">
+              <h5>{{ post.title }}</h5>
+              <p>{{ post.text }}</p>
+              <a href="{{ url_for('posts') }}{{ post.id }}" class="right blue-grey-text text-lighten-4">{% if post.commentable == 0 %}Comments ({{ post.comments }}){% else %}View post{% endif %}</a>
+          </div>
+      </div>
+  </div>
+{% endfor %}
+{% endif %}
+ <div class="divider"></div>
+
+
+{% endblock %}
